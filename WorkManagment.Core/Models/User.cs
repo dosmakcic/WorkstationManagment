@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WorkstationManagment.Models
+namespace WorkstationManagment.Core.Models
 {
    public class User
     {

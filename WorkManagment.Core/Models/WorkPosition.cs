@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WorkstationManagment.Core.Models;
 
-namespace WorkstationManagment.Models
+namespace WorkstationManagment.Core.Models
 {
     public class WorkPosition
     {
