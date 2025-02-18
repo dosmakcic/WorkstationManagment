@@ -1,30 +1,30 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WorkstationManagment.Core.Models;
-using WorkstationManagment.Core.Repositories;
+using WorkstationManagment.Core.Services;
+using WorkstationManagment.Core.Data;
 
 namespace WorkstationManagment.Core.Services
 {
     public class AuthService : IAuthService
     {
-        private readonly IUserRepository _userRepository;
+        private readonly IUserService _userService;
+        private readonly ApplicationDbContext _context;
 
-        public AuthService(IUserRepository userRepository)
+        public AuthService(IUserService userService)
         {
-            _userRepository = userRepository;
+            _userService = userService;
         }
 
-        public async Task<bool> AuthenticateAsync(string username, string password)
+        public async Task<User> AuthenticateAsync(string username, string password)
         {
-            var user = await _userRepository.GetUserByUsernameAsync(username);
-            if (user != null && user.Password == password) 
-            {
-                return true;
-            }
-            return false;
+                 return await _context.Users
+                .Where(u => u.Username == username && u.Password == password)
+                .FirstOrDefaultAsync();
         }
     }
 }

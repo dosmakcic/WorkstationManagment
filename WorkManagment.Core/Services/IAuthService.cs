@@ -9,7 +9,7 @@ namespace WorkstationManagment.Core.Services
 {
     public interface IAuthService
     {
-        public  Task<bool> AuthenticateAsync(string username, string password);
+        public  Task<User> AuthenticateAsync(string username, string password);
 
     }
 }

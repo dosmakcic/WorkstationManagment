@@ -1,7 +1,7 @@
 using System;
 using Avalonia.Controls;
 using Avalonia.Controls.Templates;
-using WorkstationManagment.ViewModels;
+using WorkstationManagment.UI.ViewModels;
 
 namespace WorkstationManagment;
 

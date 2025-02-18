@@ -1,3 +1,4 @@
+using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 using Splat;
@@ -5,13 +6,12 @@ using WorkstationManagment.UI.ViewModels;
 
 namespace WorkstationManagment.UI.Views
 {
-
-    public partial class MainWindow : Window
+    public partial class LoginView : Window
     {
-        public MainWindow()
+        public LoginView()
         {
             InitializeComponent();
-            DataContext = Locator.Current.GetService<MainWindowViewModel>();
+            DataContext = Locator.Current.GetService<LoginViewModel>();  // Postavljamo DataContext na LoginViewModel
         }
 
         private void InitializeComponent()
@@ -19,5 +19,6 @@ namespace WorkstationManagment.UI.Views
             AvaloniaXamlLoader.Load(this);
         }
     }
+
 }
 
