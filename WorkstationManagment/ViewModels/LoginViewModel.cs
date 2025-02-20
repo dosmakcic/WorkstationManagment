@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Reactive;
 using System.Threading.Tasks;
+using Microsoft.Extensions.DependencyInjection;
 using ReactiveUI;
 using Splat;
 using WorkstationManagment.Core.Services;
@@ -14,6 +15,7 @@ namespace WorkstationManagment.UI.ViewModels
     {
         private readonly IAuthService _authService;
         private readonly INavigationService _navigationService;
+
 
 
         public LoginViewModel(IScreen screen, IAuthService authService, INavigationService navigationService)
@@ -42,11 +44,11 @@ namespace WorkstationManagment.UI.ViewModels
             {
                 if (user.Role?.Name == "Admin")
                 {
-                    _navigationService.NavigateTo(Locator.Current.GetService<AdminViewModel>());
+                    _navigationService.NavigateTo(App.ServiceProvider.GetRequiredService<AdminViewModel>());
                 }
                 else
                 {
-                    var userViewModel = Locator.Current.GetService<UserViewModel>();
+                    var userViewModel = App.ServiceProvider.GetRequiredService<UserViewModel>();
 
 
                     userViewModel.SetUser(user);

@@ -1,29 +1,27 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using ReactiveUI;
-using Splat;
 using System;
-using WorkstationManagment.UI.ViewModels;
+using WorkstationManagment.Core.Services;
 
-namespace WorkstationManagment.UI.ViewModels 
+namespace WorkstationManagment.UI.ViewModels
 {
     public class MainWindowViewModel : ViewModelBase, IScreen
     {
-        public RoutingState Router { get; } = new RoutingState();
-        // public string UrlPathSegment => "MainWindow";
+        public RoutingState Router { get; }
         private readonly IServiceProvider _serviceProvider;
-        public MainWindowViewModel()
+
+        public MainWindowViewModel(RoutingState router, IServiceProvider serviceProvider)
         {
-            var loginViewModel = Locator.Current.GetService<LoginViewModel>();
+            Router = router;
+            _serviceProvider = serviceProvider;
+           
+        }
 
+        public void NavigateToLogin()
+        {
+            var loginViewModel = _serviceProvider.GetRequiredService<LoginViewModel>();
 
-            if (loginViewModel != null)
-            {
-               
-                Router.Navigate.Execute(loginViewModel);
-            }
-            
+            Router.Navigate.Execute(loginViewModel).Subscribe();
         }
     }
-
 }
-

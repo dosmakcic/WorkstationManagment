@@ -15,7 +15,7 @@ namespace WorkstationManagment;
 
 public partial class App : Application
 {
-
+    public static IServiceProvider ServiceProvider { get; private set; }
     
     public override void Initialize()
     {
@@ -28,46 +28,60 @@ public partial class App : Application
         var services = new ServiceCollection();
         ConfigureServices(services);
 
-        var serviceProvider = services.BuildServiceProvider();
-        Locator.CurrentMutable.InitializeReactiveUI();
-        Locator.CurrentMutable.RegisterConstant(serviceProvider);
+        ServiceProvider = services.BuildServiceProvider();
+
+
+        Locator.CurrentMutable.Register(() => new LoginView(), typeof(IViewFor<LoginViewModel>));
+        Locator.CurrentMutable.Register(() => new MainWindow(), typeof(IViewFor<MainWindowViewModel>));
+
+
+
+
 
         if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
-        {
+        { 
 
-            var mainWindowViewModel = serviceProvider.GetRequiredService<MainWindowViewModel>();
+
+            var mainWindowViewModel = ServiceProvider.GetRequiredService<MainWindowViewModel>();
 
 
             desktop.MainWindow = new MainWindow
             {
                 DataContext = mainWindowViewModel
             };
+            mainWindowViewModel.NavigateToLogin();
+
         }
+
 
         base.OnFrameworkInitializationCompleted();
     }
 
     private void ConfigureServices(IServiceCollection services)
     {
+       
         string connectionString = "server=localhost;port=3306;database=workstation_db;user=root;password=my-secret-pw;";
         // Dodaj bazu podataka (EF Core)
         services.AddDbContext<ApplicationDbContext>(options =>
             options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
-
+      //  services.AddSingleton<ViewLocator>();
         services.AddSingleton<IAuthService, AuthService>();
         services.AddSingleton<INavigationService, NavigationService>();
         services.AddScoped<IUserService, UserService>();
         services.AddScoped<IWorkPositionService, WorkPositionService>();
-
-
-       
-        services.AddSingleton<LoginViewModel>();
+        services.AddSingleton<RoutingState>();
+        
+        
+        
         services.AddTransient<AdminViewModel>();
         services.AddTransient<UserViewModel>();
+        services.AddSingleton<LoginViewModel>();
+        //  services.AddSingleton<Lazy<LoginViewModel>>(sp => new Lazy<LoginViewModel>(() => sp.GetRequiredService<LoginViewModel>()));
+        
         services.AddSingleton<MainWindowViewModel>();
-        services.AddSingleton<IScreen>(sp => sp.GetRequiredService<MainWindowViewModel>());
-
-
+        services.AddSingleton<IScreen, MainWindowViewModel>();
+       
+      
 
 
 

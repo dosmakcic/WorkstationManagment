@@ -12,12 +12,12 @@ namespace WorkstationManagment.Core.Services
 {
     public class AuthService : IAuthService
     {
-        private readonly IUserService _userService;
+       
         private readonly ApplicationDbContext _context;
 
-        public AuthService(IUserService userService)
+        public AuthService()
         {
-            _userService = userService;
+            
         }
 
         public async Task<User> AuthenticateAsync(string username, string password)

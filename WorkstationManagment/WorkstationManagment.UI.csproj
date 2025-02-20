@@ -45,8 +45,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Views\UserControl.axaml.cs">
-      <DependentUpon>UserControl.axaml</DependentUpon>
+    <Compile Update="Views\MainWindow.axaml.cs">
+      <DependentUpon>MainWindow.axaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\UserView.axaml.cs">
+      <DependentUpon>UserView.axaml</DependentUpon>
     </Compile>
   </ItemGroup>
 </Project>

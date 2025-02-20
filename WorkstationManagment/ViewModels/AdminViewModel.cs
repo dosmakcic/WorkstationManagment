@@ -102,7 +102,7 @@ namespace WorkstationManagment.UI.ViewModels
         private async Task LogoutAsync()
         {
             await Task.Delay(100);
-            var loginViewModel = Locator.Current.GetService<LoginViewModel>();
+            var loginViewModel = App.ServiceProvider.GetRequiredService<LoginViewModel>();
             _navigationService.NavigateTo(loginViewModel);
         }
     }

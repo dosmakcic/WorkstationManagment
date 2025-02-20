@@ -1,11 +1,10 @@
 <Window xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:vm="using:WorkstationManagment.UI.ViewModels"
+        xmlns:rxui="http://reactiveui.net"
         x:Class="WorkstationManagment.UI.Views.MainWindow"
         x:DataType="vm:MainWindowViewModel">
-  <Window.DataContext>
-    <vm:MainWindowViewModel />
-  </Window.DataContext>
-  <ContentControl Content="{Binding Router}" />
- 
+
+  <rxui:RoutedViewHost Router="{Binding Router}" />
+
 </Window>
