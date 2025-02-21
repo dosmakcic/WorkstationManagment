@@ -27,7 +27,7 @@ namespace WorkstationManagment.Core.Models
         public string Username { get; set; }
 
         [Required]
-        [MaxLength(50)]
+        [MaxLength(500)]
         public string Password { get; set; }
         [Required]
         public int RoleId { get; set; }

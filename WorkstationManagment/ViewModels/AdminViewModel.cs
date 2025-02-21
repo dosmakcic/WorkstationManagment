@@ -17,18 +17,19 @@ namespace WorkstationManagment.UI.ViewModels
         private readonly IUserService _userService;
         private readonly IWorkPositionService _workPositionService;
         private readonly INavigationService _navigationService;
+        private readonly IServiceProvider _serviceProvider;
         
 
         private User? _selectedUser;
         private WorkPosition? _selectedWorkPosition;
 
-        public AdminViewModel(IScreen screen, User user,IUserService userService, IWorkPositionService workPositionService, INavigationService navigationService)
+        public AdminViewModel(IScreen screen,IUserService userService, IWorkPositionService workPositionService, INavigationService navigationService, IServiceProvider serviceProvider)
         {
             HostScreen = screen ?? throw new ArgumentNullException(nameof(screen));
             _userService = userService ?? throw new ArgumentNullException(nameof(userService));
             _workPositionService = workPositionService ?? throw new ArgumentNullException(nameof(workPositionService));
             _navigationService = navigationService ?? throw new ArgumentNullException(nameof(navigationService));
-            
+            _serviceProvider = serviceProvider;
 
             Users = new ObservableCollection<User>();
             WorkPositions = new ObservableCollection<WorkPosition>();

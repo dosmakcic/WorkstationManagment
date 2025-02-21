@@ -10,6 +10,7 @@ using WorkstationManagment.Core.Data;
 using Microsoft.EntityFrameworkCore;
 using Splat;
 using ReactiveUI;
+using WorkstationManagment.UI;
 
 namespace WorkstationManagment;
 
@@ -33,8 +34,8 @@ public partial class App : Application
 
         Locator.CurrentMutable.Register(() => new LoginView(), typeof(IViewFor<LoginViewModel>));
         Locator.CurrentMutable.Register(() => new MainWindow(), typeof(IViewFor<MainWindowViewModel>));
-
-
+        Locator.CurrentMutable.Register(() => new AdminView(), typeof(IViewFor<AdminViewModel>));
+       
 
 
 

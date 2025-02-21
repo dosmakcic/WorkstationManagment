@@ -1,0 +1,46 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="clr-namespace:WorkstationManagment.UI.ViewModels"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:DataType="vm:AdminViewModel"
+             x:Class="WorkstationManagment.UI.Views.AdminView">
+
+  <Grid>
+
+    <Grid.RowDefinitions>
+      <RowDefinition Height="Auto"/>
+      <RowDefinition Height="*"/>
+      <RowDefinition Height="Auto"/>
+    </Grid.RowDefinitions>
+
+    <!-- Naslov -->
+    <TextBlock Text="Admin Panel" FontSize="20" FontWeight="Bold" HorizontalAlignment="Center" Margin="10"/>
+
+    <Grid Grid.Row="1"  Margin="10">
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="*"/>
+        <ColumnDefinition Width="*"/>
+      </Grid.ColumnDefinitions>
+
+      <!-- Sekcija: Korisnici -->
+      <StackPanel Grid.Column="0" Spacing="10">
+        <TextBlock Text="Korisnici (Ne-admini)" FontSize="16" FontWeight="Bold" Margin="0,0,0,10"/>
+        <ListBox ItemsSource="{Binding Users}" SelectedItem="{Binding SelectedUser}" DisplayMemberBinding="{Binding Username}" Height="200"/>
+      </StackPanel>
+
+      <!-- Sekcija: Radne pozicije -->
+      <StackPanel Grid.Column="1" Spacing="10">
+        <TextBlock Text="Radne pozicije" FontSize="16" FontWeight="Bold" Margin="0,0,0,10"/>
+        <ListBox ItemsSource="{Binding WorkPositions}" SelectedItem="{Binding SelectedWorkPosition}" DisplayMemberBinding="{Binding Name}" Height="200"/>
+      </StackPanel>
+    </Grid>
+
+    <!-- Dugmad za akcije -->
+   
+    <!-- Dugme za logout -->
+    <Button Grid.Row="3" Content="Logout" Command="{Binding LogoutCommand}" HorizontalAlignment="Right" Margin="10"/>
+
+  </Grid>
+</UserControl>

@@ -15,14 +15,16 @@ namespace WorkstationManagment.UI.ViewModels
     {
         private readonly IAuthService _authService;
         private readonly INavigationService _navigationService;
+        private readonly IServiceProvider _serviceProvider;
 
 
 
-        public LoginViewModel(IScreen screen, IAuthService authService, INavigationService navigationService)
+        public LoginViewModel(IScreen screen, IAuthService authService, INavigationService navigationService, IServiceProvider serviceProvider)
         {
             HostScreen = screen ?? throw new ArgumentNullException(nameof(screen));
             _authService = authService ?? throw new ArgumentNullException(nameof(authService));
             _navigationService = navigationService ?? throw new ArgumentNullException(nameof(navigationService));
+            _serviceProvider = serviceProvider;
 
             LoginCommand = ReactiveCommand.CreateFromTask(ExecuteLoginAsync);
         }
@@ -42,9 +44,10 @@ namespace WorkstationManagment.UI.ViewModels
 
             if (user != null)
             {
-                if (user.Role?.Name == "Admin")
+                if (user.RoleId == 1)
                 {
-                    _navigationService.NavigateTo(App.ServiceProvider.GetRequiredService<AdminViewModel>());
+                    var adminViewModel = _serviceProvider.GetRequiredService<AdminViewModel>();
+                    _navigationService.NavigateTo(adminViewModel);
                 }
                 else
                 {

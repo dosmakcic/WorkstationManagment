@@ -19,7 +19,7 @@ namespace WorkstationManagment.Core.Data
         public DbSet<WorkPosition> WorkPositions { get; set; }
         public DbSet<UserWorkPosition> UserWorkPositions { get; set; }
 
-     
+      
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -62,7 +62,7 @@ namespace WorkstationManagment.Core.Data
             );
 
             modelBuilder.Entity<UserWorkPosition>().HasData(
-            new UserWorkPosition { UserId = 1, WorkPositionId = 1 }
+            new UserWorkPosition { Id=-1, UserId = 1, WorkPositionId = 1 }
             );
         }
 

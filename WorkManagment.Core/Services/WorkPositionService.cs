@@ -13,6 +13,10 @@ namespace WorkstationManagment.Core.Services
     {
         private readonly ApplicationDbContext _context;
 
+        public WorkPositionService(ApplicationDbContext context)    
+        {
+            _context = context;
+        }
 
         public async Task<List<WorkPosition>> GetAllWorkPositionsAsync()
         {

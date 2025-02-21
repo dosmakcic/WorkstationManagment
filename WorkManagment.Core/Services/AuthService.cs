@@ -15,16 +15,21 @@ namespace WorkstationManagment.Core.Services
        
         private readonly ApplicationDbContext _context;
 
-        public AuthService()
+        public AuthService(ApplicationDbContext context)
         {
-            
+            _context = context;
         }
 
         public async Task<User> AuthenticateAsync(string username, string password)
         {
-                 return await _context.Users
-                .Where(u => u.Username == username && u.Password == password)
-                .FirstOrDefaultAsync();
+            var user = await _context.Users.FirstOrDefaultAsync(u => u.Username == username);
+
+            // Ako korisnik ne postoji ili lozinka nije validna, vrati null
+            if (user == null || !BCrypt.Net.BCrypt.Verify(password, user.Password))
+                return null;
+
+            // Ako je lozinka tačna, vrati korisnika
+            return user;
         }
     }
 }
