@@ -70,6 +70,7 @@ public partial class App : Application
         services.AddSingleton<INavigationService, NavigationService>();
         services.AddScoped<IUserService, UserService>();
         services.AddScoped<IWorkPositionService, WorkPositionService>();
+        services.AddScoped<IRoleService, RoleService>();
         services.AddSingleton<RoutingState>();
         
         

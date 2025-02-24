@@ -56,15 +56,22 @@ namespace WorkstationManagment.Core.Data
             );
 
             string adminPassword = BCrypt.Net.BCrypt.HashPassword("johndoe123");
+            string user1Password = BCrypt.Net.BCrypt.HashPassword("marko1");
+            string user2Password = BCrypt.Net.BCrypt.HashPassword("ivan1");
+            string user3Password = BCrypt.Net.BCrypt.HashPassword("ana1");
+
 
             modelBuilder.Entity<User>().HasData(
-            new User { Id=1, FirstName="John", LastName="Doe", Username="john123", Password=adminPassword, RoleId=1 }
+            new User { Id=1, FirstName="John", LastName="Doe", Username="john123", Password=adminPassword, RoleId=1 },
+            new User { Id=2, FirstName="Marko", LastName="Markovic", Username="marko1", Password=user1Password, RoleId=2},
+            new User { Id = 3, FirstName = "Ivan", LastName = "Ivanovic", Username = "ivan1", Password = user2Password, RoleId = 2 },
+            new User { Id = 4, FirstName = "Ana", LastName = "Ivic", Username = "ana1", Password = user3Password, RoleId = 2 }
             );
 
             modelBuilder.Entity<UserWorkPosition>().HasData(
             new UserWorkPosition { Id=-1, UserId = 1, WorkPositionId = 1 }
             );
         }
-
+        
     }
 }

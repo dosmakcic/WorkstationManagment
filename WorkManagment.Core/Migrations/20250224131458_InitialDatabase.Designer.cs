@@ -12,8 +12,8 @@ using WorkstationManagment.Core.Data;
 namespace WorkstationManagment.Core.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250221153310_IncreasePasswordLength")]
-    partial class IncreasePasswordLength
+    [Migration("20250224131458_InitialDatabase")]
+    partial class InitialDatabase
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -104,9 +104,36 @@ namespace WorkstationManagment.Core.Migrations
                             Id = 1,
                             FirstName = "John",
                             LastName = "Doe",
-                            Password = "$2a$11$wpezLxjubBo85vWbJ1EyReAIe8RntpL7QMxnsE1gLvEoXjPjB6xT2",
+                            Password = "$2a$11$1FCKrCh4XgvVMftI7SmQluUS/YKVGfZtbWyZteX7oipZ8OI2D.QGC",
                             RoleId = 1,
                             Username = "john123"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            FirstName = "Marko",
+                            LastName = "Markovic",
+                            Password = "$2a$11$mUDZ4cxrlhND9DWgSydrtutKTwLh.hM/DO8wC5dL.dq8RL7vV9mUu",
+                            RoleId = 2,
+                            Username = "marko1"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            FirstName = "Ivan",
+                            LastName = "Ivanovic",
+                            Password = "$2a$11$OuQ1.T223rdY5v2INkeWZObm47FvXnSF5jiqePJPbBnlRnWY4T27a",
+                            RoleId = 2,
+                            Username = "ivan1"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            FirstName = "Ana",
+                            LastName = "Ivic",
+                            Password = "$2a$11$gsN8QZit8NGX6e95cYhjWuqOKhV27zalr3fLuILnI3DuDfqtyg/p.",
+                            RoleId = 2,
+                            Username = "ana1"
                         });
                 });
 

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using WorkstationManagment.Core.Data;
 using WorkstationManagment.Core.Models;
 using Microsoft.EntityFrameworkCore;
+using System.Runtime.InteropServices.Marshalling;
 
 
 namespace WorkstationManagment.Core.Services
@@ -33,7 +34,9 @@ namespace WorkstationManagment.Core.Services
         }
 
         public async Task AddUserAsync(User user)
-        {
+        { 
+            var password= BCrypt.Net.BCrypt.HashPassword(user.Password);
+            user.Password = password;
             _context.Users.Add(user);
             await _context.SaveChangesAsync();
         }

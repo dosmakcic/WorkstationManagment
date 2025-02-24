@@ -24,11 +24,9 @@ namespace WorkstationManagment.Core.Services
         {
             var user = await _context.Users.FirstOrDefaultAsync(u => u.Username == username);
 
-            // Ako korisnik ne postoji ili lozinka nije validna, vrati null
             if (user == null || !BCrypt.Net.BCrypt.Verify(password, user.Password))
                 return null;
 
-            // Ako je lozinka tačna, vrati korisnika
             return user;
         }
     }

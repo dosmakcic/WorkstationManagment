@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace WorkstationManagment.Core.Migrations
 {
     /// <inheritdoc />
-    public partial class IncreasePasswordLength : Migration
+    public partial class InitialDatabase : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -130,7 +130,13 @@ namespace WorkstationManagment.Core.Migrations
             migrationBuilder.InsertData(
                 table: "Users",
                 columns: new[] { "Id", "FirstName", "LastName", "Password", "RoleId", "Username" },
-                values: new object[] { 1, "John", "Doe", "$2a$11$wpezLxjubBo85vWbJ1EyReAIe8RntpL7QMxnsE1gLvEoXjPjB6xT2", 1, "john123" });
+                values: new object[,]
+                {
+                    { 1, "John", "Doe", "$2a$11$1FCKrCh4XgvVMftI7SmQluUS/YKVGfZtbWyZteX7oipZ8OI2D.QGC", 1, "john123" },
+                    { 2, "Marko", "Markovic", "$2a$11$mUDZ4cxrlhND9DWgSydrtutKTwLh.hM/DO8wC5dL.dq8RL7vV9mUu", 2, "marko1" },
+                    { 3, "Ivan", "Ivanovic", "$2a$11$OuQ1.T223rdY5v2INkeWZObm47FvXnSF5jiqePJPbBnlRnWY4T27a", 2, "ivan1" },
+                    { 4, "Ana", "Ivic", "$2a$11$gsN8QZit8NGX6e95cYhjWuqOKhV27zalr3fLuILnI3DuDfqtyg/p.", 2, "ana1" }
+                });
 
             migrationBuilder.InsertData(
                 table: "UserWorkPositions",

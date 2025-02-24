@@ -18,18 +18,28 @@ namespace WorkstationManagment.Core.Services
             _context = context;
         }
 
+        public async Task<List<UserWorkPosition>> GetAllUserWorkPositionsAsync()
+        {
+            return await _context.UserWorkPositions
+               .Include(uwp => uwp.User)             // Dodaj povezane korisnike
+               .Include(uwp => uwp.WorkPosition)     // Dodaj povezane radne pozicije
+               .ToListAsync();
+        }
+
         public async Task<List<WorkPosition>> GetAllWorkPositionsAsync()
         {
             return await _context.WorkPositions.ToListAsync();
         }
 
-        public async Task AssignWorkPositionAsync(int userId, int workPositionId)
+
+        public async Task AssignWorkPositionAsync(int userId, int workPositionId, string productName)
         {
             var userWorkPosition = new UserWorkPosition
             {
                 UserId = userId,
                 WorkPositionId = workPositionId,
-                Date = DateTime.Now
+                ProductName=productName,
+                Date = DateTime.UtcNow
             };
 
             _context.UserWorkPositions.Add(userWorkPosition);

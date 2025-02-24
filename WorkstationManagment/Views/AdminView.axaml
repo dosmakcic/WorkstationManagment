@@ -7,40 +7,103 @@
              x:DataType="vm:AdminViewModel"
              x:Class="WorkstationManagment.UI.Views.AdminView">
 
-  <Grid>
-
+  <Grid Margin="10">
     <Grid.RowDefinitions>
       <RowDefinition Height="Auto"/>
-      <RowDefinition Height="*"/>
+     
       <RowDefinition Height="Auto"/>
+     
+      <RowDefinition Height="*"/>
+      
     </Grid.RowDefinitions>
 
-    <!-- Naslov -->
-    <TextBlock Text="Admin Panel" FontSize="20" FontWeight="Bold" HorizontalAlignment="Center" Margin="10"/>
+    <StackPanel Grid.Row="0" Orientation="Vertical" Margin="10" Spacing="5">
+      <TextBlock Text="Dodaj novog korisnika" FontSize="16" FontWeight="Bold"/>
+      <TextBox Text="{Binding NewFirstName}" Watermark="First name"/>
+      <TextBox Text="{Binding NewLastName}" Watermark="Last name"/>
+      <TextBox Text="{Binding NewUsername}" Watermark="Username"/>
+      <TextBox Text="{Binding NewPassword}" Watermark="Password"/>
+      <TextBox Text="{Binding NewProductName}" Watermark="Product name"/>
+      <ComboBox ItemsSource="{Binding WorkPositions}"
+                SelectedItem="{Binding NewUserWorkPosition}"
+                DisplayMemberBinding="{Binding Name}" />
+      <ComboBox ItemsSource="{Binding Roles}"
+            SelectedItem="{Binding NewRole}"
+            DisplayMemberBinding="{Binding Name}" />
+      <Button Content="Dodaj korisnika" Command="{Binding AddNewUserCommand}"/>
+    </StackPanel>
 
-    <Grid Grid.Row="1"  Margin="10">
-      <Grid.ColumnDefinitions>
-        <ColumnDefinition Width="*"/>
-        <ColumnDefinition Width="*"/>
-      </Grid.ColumnDefinitions>
+  
+    <StackPanel Grid.Row="1" Orientation="Vertical" Margin="10" Spacing="5">
+      <TextBlock Text="Promijeni radnu poziciju" FontSize="16" FontWeight="Bold"/>
+      <ComboBox ItemsSource="{Binding UserWorkPositions}"
+                SelectedItem="{Binding SelectedUserWorkPosition}"
+                DisplayMemberBinding="{Binding WorkPosition.Name}" />
+      <ComboBox ItemsSource="{Binding WorkPositions}"
+                SelectedItem="{Binding SelectedWorkPosition}"
+                DisplayMemberBinding="{Binding Name}" />
+      <Button Content="Ažuriraj poziciju" Command="{Binding ChangeUserRoleCommand}"/>
+    </StackPanel>
 
-      <!-- Sekcija: Korisnici -->
-      <StackPanel Grid.Column="0" Spacing="10">
-        <TextBlock Text="Korisnici (Ne-admini)" FontSize="16" FontWeight="Bold" Margin="0,0,0,10"/>
-        <ListBox ItemsSource="{Binding Users}" SelectedItem="{Binding SelectedUser}" DisplayMemberBinding="{Binding Username}" Height="200"/>
-      </StackPanel>
+  
+    <Grid Grid.Row="2">
+    
+      <Grid.RowDefinitions>
+        <RowDefinition Height="Auto"/>
+     
+        <RowDefinition Height="*"/>
+     
+      </Grid.RowDefinitions>
 
-      <!-- Sekcija: Radne pozicije -->
-      <StackPanel Grid.Column="1" Spacing="10">
-        <TextBlock Text="Radne pozicije" FontSize="16" FontWeight="Bold" Margin="0,0,0,10"/>
-        <ListBox ItemsSource="{Binding WorkPositions}" SelectedItem="{Binding SelectedWorkPosition}" DisplayMemberBinding="{Binding Name}" Height="200"/>
-      </StackPanel>
+ 
+      <Grid Grid.Row="0" Margin="5">
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="50"/>
+          <ColumnDefinition Width="150"/>
+          <ColumnDefinition Width="150"/>
+          <ColumnDefinition Width="200"/>
+          <ColumnDefinition Width="150"/>
+          <ColumnDefinition Width="120"/>
+        </Grid.ColumnDefinitions>
+
+        <TextBlock Text="ID" FontWeight="Bold" Grid.Column="0" HorizontalAlignment="Center"/>
+        <TextBlock Text="First Name" FontWeight="Bold" Grid.Column="1" HorizontalAlignment="Center"/>
+        <TextBlock Text="Last Name" FontWeight="Bold" Grid.Column="2" HorizontalAlignment="Center"/>
+        <TextBlock Text="Work Position" FontWeight="Bold" Grid.Column="3" HorizontalAlignment="Center"/>
+        <TextBlock Text="Product Name" FontWeight="Bold" Grid.Column="4" HorizontalAlignment="Center"/>
+        <TextBlock Text="Assigned Date" FontWeight="Bold" Grid.Column="5" HorizontalAlignment="Center"/>
+      </Grid>
+
+      
+      <ScrollViewer Grid.Row="1">
+        <ItemsControl ItemsSource="{Binding UserWorkPositions}">
+          <ItemsControl.ItemTemplate>
+            <DataTemplate>
+              <Grid Margin="5">
+                <Grid.ColumnDefinitions>
+                  <ColumnDefinition Width="50"/>
+                  <ColumnDefinition Width="150"/>
+                  <ColumnDefinition Width="150"/>
+                  <ColumnDefinition Width="200"/>
+                  <ColumnDefinition Width="150"/>
+                  <ColumnDefinition Width="120"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Text="{Binding Id}" Grid.Column="0" HorizontalAlignment="Center"/>
+                <TextBlock Text="{Binding User.FirstName}" Grid.Column="1" HorizontalAlignment="Center"/>
+                <TextBlock Text="{Binding User.LastName}" Grid.Column="2" HorizontalAlignment="Center"/>
+                <TextBlock Text="{Binding WorkPosition.Name}" Grid.Column="3" HorizontalAlignment="Center"/>
+                <TextBlock Text="{Binding ProductName}" Grid.Column="4" HorizontalAlignment="Center"/>
+                <TextBlock Text="{Binding Date}" Grid.Column="5" HorizontalAlignment="Center"/>
+              </Grid>
+            </DataTemplate>
+          </ItemsControl.ItemTemplate>
+        </ItemsControl>
+      </ScrollViewer>
     </Grid>
 
-    <!-- Dugmad za akcije -->
-   
-    <!-- Dugme za logout -->
-    <Button Grid.Row="3" Content="Logout" Command="{Binding LogoutCommand}" HorizontalAlignment="Right" Margin="10"/>
 
+    <Button Grid.Row="3" Content="Logout" Command="{Binding LogoutCommand}" HorizontalAlignment="Right" Margin="10"/>
   </Grid>
+
 </UserControl>
