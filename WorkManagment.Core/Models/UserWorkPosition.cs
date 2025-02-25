@@ -1,8 +1,8 @@
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using WorkstationManagment.Core.Models;
-using WorkstationManagment.Core.Models;
+
+
 
 
 namespace WorkstationManagment.Core.Models

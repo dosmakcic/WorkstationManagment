@@ -32,7 +32,7 @@ namespace WorkstationManagment.UI.ViewModels
         private Role? _newRole;
 
 
-        private User? _selectedUser;
+       
         private WorkPosition? _selectedWorkPosition;
 
 
@@ -52,12 +52,15 @@ namespace WorkstationManagment.UI.ViewModels
 
 
             ChangeUserRoleCommand = ReactiveCommand.CreateFromTask(ChangeUserWorkPositionAsync);
-            //RemoveWorkPositionCommand = ReactiveCommand.CreateFromTask(RemoveWorkPositionAsync);
             LoadDataCommand = ReactiveCommand.CreateFromTask(LoadDataAsync);
             LogoutCommand = ReactiveCommand.CreateFromTask(LogoutAsync);
             AddNewUserCommand = ReactiveCommand.CreateFromTask(AddNewUserAsync);
+            DeleteUserWorkPositionCommand = ReactiveCommand.CreateFromTask<UserWorkPosition, Unit>(async userWorkPosition =>
+            {
+                await DeleteUserWorkPositionAsync(userWorkPosition);
+                return Unit.Default;
+            });
 
-           
             LoadDataCommand.Execute().Subscribe();
         }
 
@@ -70,13 +73,7 @@ namespace WorkstationManagment.UI.ViewModels
 
         public ObservableCollection<Role> Roles { get; }
 
-        //public User? SelectedUser
-        //{
-        //    get => _selectedUser;
-        //    set => this.RaiseAndSetIfChanged(ref _selectedUser, value);
-        //}
-
-
+       
         private UserWorkPosition? _selectedUserWorkPosition;
 
         public UserWorkPosition? SelectedUserWorkPosition
@@ -102,13 +99,12 @@ namespace WorkstationManagment.UI.ViewModels
         public string NewProductName { get => _newProductName; set => this.RaiseAndSetIfChanged(ref _newProductName, value); }
         public Role? NewRole { get => _newRole; set => this.RaiseAndSetIfChanged(ref _newRole, value); }
         public ReactiveCommand<Unit, Unit> ChangeUserRoleCommand { get; }
-
-        public ReactiveCommand<Unit, Unit> RemoveWorkPositionCommand { get; }
         public ReactiveCommand<Unit, Unit> LoadDataCommand { get; }
         public ReactiveCommand<Unit, Unit> LogoutCommand { get; }
-
         public ReactiveCommand<Unit, Unit> AddNewUserCommand { get; }
-       
+        public ReactiveCommand<UserWorkPosition, Unit> DeleteUserWorkPositionCommand { get; }
+
+
 
 
         private async Task LoadDataAsync()
@@ -155,14 +151,7 @@ namespace WorkstationManagment.UI.ViewModels
             await LoadDataAsync();
         }
 
-        //private async Task RemoveWorkPositionAsync()
-        //{
-        //    if (SelectedUser == null || SelectedWorkPosition == null) return;
-
-        //    await _workPositionService.RemoveWorkPositionAsync(SelectedUser.Id, SelectedWorkPosition.Id);
-        //    await LoadDataAsync();
-        //}
-
+       
         private async Task AddNewUserAsync()
         {
             try
@@ -208,7 +197,26 @@ namespace WorkstationManagment.UI.ViewModels
             }
         }
 
+        private async Task<Unit> DeleteUserWorkPositionAsync(UserWorkPosition userWorkPosition)
+        {
+            if (userWorkPosition == null)
+                return Unit.Default;
 
+            try
+            {
+                
+                await _workPositionService.RemoveWorkPositionAsync(userWorkPosition.UserId, userWorkPosition.WorkPositionId);
+                await _userService.DeleteUserAsync(userWorkPosition.UserId); 
+                UserWorkPositions.Remove(userWorkPosition);
+            }
+            catch (Exception ex)
+            {
+                
+                Console.WriteLine($"Error: {ex.Message}");
+            }
+            return Unit.Default;
+
+        }
 
 
         private async Task LogoutAsync()

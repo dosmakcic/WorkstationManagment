@@ -2,10 +2,13 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             x:Name="AdminViewRoot"
              xmlns:vm="clr-namespace:WorkstationManagment.UI.ViewModels"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:DataType="vm:AdminViewModel"
              x:Class="WorkstationManagment.UI.Views.AdminView">
+
+  
 
   <Grid Margin="10">
     <Grid.RowDefinitions>
@@ -18,7 +21,7 @@
     </Grid.RowDefinitions>
 
     <StackPanel Grid.Row="0" Orientation="Vertical" Margin="10" Spacing="5">
-      <TextBlock Text="Dodaj novog korisnika" FontSize="16" FontWeight="Bold"/>
+      <TextBlock Text="Add new user with work position" FontSize="16" FontWeight="Bold"/>
       <TextBox Text="{Binding NewFirstName}" Watermark="First name"/>
       <TextBox Text="{Binding NewLastName}" Watermark="Last name"/>
       <TextBox Text="{Binding NewUsername}" Watermark="Username"/>
@@ -30,19 +33,32 @@
       <ComboBox ItemsSource="{Binding Roles}"
             SelectedItem="{Binding NewRole}"
             DisplayMemberBinding="{Binding Name}" />
-      <Button Content="Dodaj korisnika" Command="{Binding AddNewUserCommand}"/>
+      <Button Content="Add new user " Command="{Binding AddNewUserCommand}"/>
     </StackPanel>
 
   
     <StackPanel Grid.Row="1" Orientation="Vertical" Margin="10" Spacing="5">
-      <TextBlock Text="Promijeni radnu poziciju" FontSize="16" FontWeight="Bold"/>
+      <TextBlock Text="Change work position" FontSize="16" FontWeight="Bold"/>
+
+      
       <ComboBox ItemsSource="{Binding UserWorkPositions}"
                 SelectedItem="{Binding SelectedUserWorkPosition}"
-                DisplayMemberBinding="{Binding WorkPosition.Name}" />
+                DisplayMemberBinding="{Binding Id}" />
+
+      
+      <TextBlock Text="Current work position:" FontWeight="Bold"/>
+      <TextBlock Text="{Binding SelectedUserWorkPosition.WorkPosition.Name}" />
+
+      
       <ComboBox ItemsSource="{Binding WorkPositions}"
                 SelectedItem="{Binding SelectedWorkPosition}"
                 DisplayMemberBinding="{Binding Name}" />
-      <Button Content="Ažuriraj poziciju" Command="{Binding ChangeUserRoleCommand}"/>
+
+      
+      <TextBox Text="{Binding NewProductName}"
+               Watermark="Insert product name" />
+
+      <Button Content="Update user work position" Command="{Binding ChangeUserRoleCommand}"/>
     </StackPanel>
 
   

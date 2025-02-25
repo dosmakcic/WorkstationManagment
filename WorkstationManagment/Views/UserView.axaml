@@ -3,6 +3,57 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             xmlns:vm="clr-namespace:WorkstationManagment.UI.ViewModels"
+             x:DataType="vm:UserViewModel"
              x:Class="WorkstationManagment.UI.Views.UserView">
-  Welcome to Avalonia!
+  <Border Padding="20">
+    <Grid>
+      <Grid.RowDefinitions>
+        <RowDefinition Height="Auto"/>
+        <RowDefinition Height="Auto"/>
+        <RowDefinition Height="Auto"/>
+        <RowDefinition Height="Auto"/>
+        <RowDefinition Height="Auto"/>
+      
+        <RowDefinition Height="*" />
+       
+        <RowDefinition Height="Auto"/>
+        
+      </Grid.RowDefinitions>
+
+      <TextBlock Text="User Information" FontSize="20" FontWeight="Bold"
+                 HorizontalAlignment="Center" Grid.Row="0" Margin="0,0,0,20"/>
+
+      <StackPanel Grid.Row="1" Spacing="10">
+        <TextBlock Text="First Name:" FontWeight="Bold"/>
+        <TextBlock Text="{Binding FirstName}" FontSize="16"/>
+      </StackPanel>
+
+      <StackPanel Grid.Row="2" Spacing="10">
+        <TextBlock Text="Last Name:" FontWeight="Bold"/>
+        <TextBlock Text="{Binding LastName}" FontSize="16"/>
+      </StackPanel>
+
+      <StackPanel Grid.Row="3" Spacing="10">
+        <TextBlock Text="Work Position:" FontWeight="Bold"/>
+        <TextBlock Text="{Binding WorkPositionName}" FontSize="16"/>
+      </StackPanel>
+
+      <StackPanel Grid.Row="4" Spacing="10">
+        <TextBlock Text="Product Name:" FontWeight="Bold"/>
+        <TextBlock Text="{Binding WorkPositionProductName}" FontSize="16"/>
+      </StackPanel>
+
+      <StackPanel Grid.Row="5" Spacing="10">
+        <TextBlock Text="Assigned Date:" FontWeight="Bold"/>
+        <TextBlock Text="{Binding AssignedDate}" FontSize="16"/>
+      </StackPanel>
+
+     
+      <Button Content="Logout" Command="{Binding LogoutCommand}"
+              Background="Red" Foreground="White"
+              Padding="10" HorizontalAlignment="Right"
+              Grid.Row="6" Margin="20"/>
+    </Grid>
+  </Border>
 </UserControl>

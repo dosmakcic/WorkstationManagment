@@ -31,6 +31,10 @@ namespace WorkstationManagment.Core.Services
             return await _context.WorkPositions.ToListAsync();
         }
 
+        public async Task<UserWorkPosition> FindUserWorkPositionByIdAsync(int id)
+        {
+            return await _context.UserWorkPositions.FirstOrDefaultAsync(uwp => uwp.UserId == id);
+        }
 
         public async Task AssignWorkPositionAsync(int userId, int workPositionId, string productName)
         {

@@ -35,6 +35,7 @@ public partial class App : Application
         Locator.CurrentMutable.Register(() => new LoginView(), typeof(IViewFor<LoginViewModel>));
         Locator.CurrentMutable.Register(() => new MainWindow(), typeof(IViewFor<MainWindowViewModel>));
         Locator.CurrentMutable.Register(() => new AdminView(), typeof(IViewFor<AdminViewModel>));
+        Locator.CurrentMutable.Register(() => new UserView(), typeof(IViewFor<UserViewModel>));
        
 
 
@@ -62,10 +63,10 @@ public partial class App : Application
     {
        
         string connectionString = "server=localhost;port=3306;database=workstation_db;user=root;password=my-secret-pw;";
-        // Dodaj bazu podataka (EF Core)
+        
         services.AddDbContext<ApplicationDbContext>(options =>
             options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
-      //  services.AddSingleton<ViewLocator>();
+      
         services.AddSingleton<IAuthService, AuthService>();
         services.AddSingleton<INavigationService, NavigationService>();
         services.AddScoped<IUserService, UserService>();
@@ -75,15 +76,15 @@ public partial class App : Application
         
         
         
-        services.AddTransient<AdminViewModel>();
-        services.AddTransient<UserViewModel>();
+        services.AddSingleton<AdminViewModel>();
+        services.AddSingleton<UserViewModel>();
         services.AddSingleton<LoginViewModel>();
         //  services.AddSingleton<Lazy<LoginViewModel>>(sp => new Lazy<LoginViewModel>(() => sp.GetRequiredService<LoginViewModel>()));
         
         services.AddSingleton<MainWindowViewModel>();
         services.AddSingleton<IScreen, MainWindowViewModel>();
-       
-      
+
+        services.AddTransient<AdminView>();
 
 
 

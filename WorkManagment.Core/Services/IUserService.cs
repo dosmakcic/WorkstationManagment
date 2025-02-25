@@ -13,6 +13,7 @@ namespace WorkstationManagment.Core.Services
         Task<User> GetUserByUsernameAsync(string username);
         Task<IEnumerable<User>> GetAllUsersAsync();
         Task AddUserAsync(User user);
+        Task DeleteUserAsync(int userId);
 
         Task UpdateUserAsync(User user);
     }

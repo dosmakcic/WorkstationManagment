@@ -41,6 +41,16 @@ namespace WorkstationManagment.Core.Services
             await _context.SaveChangesAsync();
         }
 
+        public async Task DeleteUserAsync(int userId)
+        {
+            var user1 = await _context.Users.FirstOrDefaultAsync(u => u.Id == userId);
+            if (user1 != null)
+            {
+                _context.Users.Remove(user1);
+                await _context.SaveChangesAsync();
+            }
+        }
+
         public async Task UpdateUserAsync (User user)
         {
             var existingUser = await _context.Users.FindAsync(user.Id);

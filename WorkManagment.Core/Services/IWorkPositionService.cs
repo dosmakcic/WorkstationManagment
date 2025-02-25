@@ -12,6 +12,7 @@ namespace WorkstationManagment.Core.Services
         public Task<List<UserWorkPosition>> GetAllUserWorkPositionsAsync();
         public Task AssignWorkPositionAsync(int userId, int workPositionId,string productName);
         public  Task RemoveWorkPositionAsync(int userId, int workPositionId);
+        public  Task<UserWorkPosition> FindUserWorkPositionByIdAsync(int id);
 
         public Task<List<WorkPosition>> GetAllWorkPositionsAsync();
     }
