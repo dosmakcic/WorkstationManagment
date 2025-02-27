@@ -1,4 +1,4 @@
-# Workstation Management System
+# Workstation Management (Avalonia)
 
 This application is built using **AvaloniaUI** and **ReactiveUI** for cross-platform UI development with MVVM pattern. It integrates with a **MySQL database** using **Entity Framework Core**.
 
