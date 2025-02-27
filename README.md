@@ -21,6 +21,11 @@ Before running the project, ensure you have the following installed:
 - Visual Studio 2022 (or another .NET-compatible IDE) 
 ---
 
+## 🛠️ Project architecture
+
+WorkstationManagment.Core     (Business logic,models,services and data) <br />
+WorkstationManagment.UI       ( UI (ViewModels and Views  )        <br />           
+
 ## 🛠 Database Setup
 
 ###  Option A: Running MySQL in a Docker Container  
@@ -69,7 +74,7 @@ services.AddDbContext<ApplicationDbContext>(options =>
 
 If you use Package Manager Console , then use :
 
-  Update-Database -StartupProject WorkstationManagment.UI -Project WorkstationManagment.Core
+   `Update-Database -StartupProject WorkstationManagment.UI -Project WorkstationManagment.Core`
 
 
 ### 📊 Seeded Test Data
