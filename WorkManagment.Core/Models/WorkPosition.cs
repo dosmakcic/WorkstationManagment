@@ -22,6 +22,8 @@ namespace WorkstationManagment.Core.Models
 
         public ICollection<UserWorkPosition> UserWorkPositions { get; set; }
 
+       
+
 
     }
 }

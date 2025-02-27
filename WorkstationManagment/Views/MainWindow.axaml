@@ -5,6 +5,5 @@
         x:Class="WorkstationManagment.UI.Views.MainWindow"
         x:DataType="vm:MainWindowViewModel">
 
-  <rxui:RoutedViewHost Router="{Binding Router}" />
-
+  <ContentControl Content="{Binding CurrentViewModel}" />
 </Window>

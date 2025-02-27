@@ -11,21 +11,17 @@ using WorkstationManagment.UI.ViewModels;
 
 namespace WorkstationManagment.UI.ViewModels
 {
-    public class LoginViewModel : ViewModelBase, IRoutableViewModel
+    public class LoginViewModel : ViewModelBase
     {
         private readonly IAuthService _authService;
-        private readonly INavigationService _navigationService;
         private readonly IServiceProvider _serviceProvider;
+        private readonly MainWindowViewModel _mainWindowViewModel;
 
-
-
-        public LoginViewModel(IScreen screen, IAuthService authService, INavigationService navigationService, IServiceProvider serviceProvider)
+        public LoginViewModel(IAuthService authService, IServiceProvider serviceProvider, MainWindowViewModel mainWindowViewModel)
         {
-            HostScreen = screen ?? throw new ArgumentNullException(nameof(screen));
             _authService = authService ?? throw new ArgumentNullException(nameof(authService));
-            _navigationService = navigationService ?? throw new ArgumentNullException(nameof(navigationService));
             _serviceProvider = serviceProvider;
-
+            _mainWindowViewModel = mainWindowViewModel;
             LoginCommand = ReactiveCommand.CreateFromTask(ExecuteLoginAsync);
         }
 
@@ -35,8 +31,7 @@ namespace WorkstationManagment.UI.ViewModels
         public string Username { get; set; } = string.Empty;
         public string Password { get; set; } = string.Empty;
 
-        public string? UrlPathSegment => "login";
-        public IScreen HostScreen { get; }
+       
 
         private async Task ExecuteLoginAsync()
         {
@@ -47,16 +42,16 @@ namespace WorkstationManagment.UI.ViewModels
                 if (user.RoleId == 1)
                 {
                     var adminViewModel = _serviceProvider.GetRequiredService<AdminViewModel>();
-                    _navigationService.NavigateTo(adminViewModel);
+                    _mainWindowViewModel.CurrentViewModel = adminViewModel;
                 }
                 else
                 {
-                    var userViewModel = App.ServiceProvider.GetRequiredService<UserViewModel>();
+                    var userViewModel = _serviceProvider.GetRequiredService<UserViewModel>();
 
 
                     userViewModel.SetUser(user);
 
-                    _navigationService.NavigateTo(userViewModel);
+                    _mainWindowViewModel.CurrentViewModel = userViewModel;
                 }
             }
         }

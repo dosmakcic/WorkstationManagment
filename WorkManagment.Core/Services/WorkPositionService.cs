@@ -13,53 +13,36 @@ namespace WorkstationManagment.Core.Services
     {
         private readonly ApplicationDbContext _context;
 
-        public WorkPositionService(ApplicationDbContext context)    
+
+        public WorkPositionService(ApplicationDbContext context)
         {
             _context = context;
         }
 
-        public async Task<List<UserWorkPosition>> GetAllUserWorkPositionsAsync()
-        {
-            return await _context.UserWorkPositions
-               .Include(uwp => uwp.User)             // Dodaj povezane korisnike
-               .Include(uwp => uwp.WorkPosition)     // Dodaj povezane radne pozicije
-               .ToListAsync();
-        }
 
-        public async Task<List<WorkPosition>> GetAllWorkPositionsAsync()
+       public async Task<List<WorkPosition>> GetAllWorkPositionsAsync()
         {
             return await _context.WorkPositions.ToListAsync();
         }
 
-        public async Task<UserWorkPosition> FindUserWorkPositionByIdAsync(int id)
+        public async Task AddWorkPositionAsync(WorkPosition workPosition)
         {
-            return await _context.UserWorkPositions.FirstOrDefaultAsync(uwp => uwp.UserId == id);
-        }
+            var isThereWorkPosition = _context.WorkPositions.FirstOrDefaultAsync(wp => wp.Name == workPosition.Name);
 
-        public async Task AssignWorkPositionAsync(int userId, int workPositionId, string productName)
-        {
-            var userWorkPosition = new UserWorkPosition
+            if (isThereWorkPosition == null)
             {
-                UserId = userId,
-                WorkPositionId = workPositionId,
-                ProductName=productName,
-                Date = DateTime.UtcNow
-            };
+                return;
+            }
+           
 
-            _context.UserWorkPositions.Add(userWorkPosition);
+            _context.WorkPositions.Add(workPosition);
             await _context.SaveChangesAsync();
         }
 
-        public async Task RemoveWorkPositionAsync(int userId, int workPositionId)
+        public async Task<WorkPosition> GetWorkPositionByIdAsync(int id)
         {
-            var userWorkPosition = await _context.UserWorkPositions
-                .FirstOrDefaultAsync(uwp => uwp.UserId == userId && uwp.WorkPositionId == workPositionId);
-
-            if (userWorkPosition != null)
-            {
-                _context.UserWorkPositions.Remove(userWorkPosition);
-                await _context.SaveChangesAsync();
-            }
+          return  await _context.WorkPositions.FindAsync(id);
         }
+
     }
 }

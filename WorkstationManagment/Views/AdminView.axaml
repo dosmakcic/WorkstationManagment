@@ -7,119 +7,159 @@
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:DataType="vm:AdminViewModel"
              x:Class="WorkstationManagment.UI.Views.AdminView">
-
   
+  <ScrollViewer VerticalScrollBarVisibility="Auto">
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
 
-  <Grid Margin="10">
-    <Grid.RowDefinitions>
-      <RowDefinition Height="Auto"/>
-     
-      <RowDefinition Height="Auto"/>
-     
-      <RowDefinition Height="*"/>
-      
-    </Grid.RowDefinitions>
+        
+        <Border BorderBrush="Black" BorderThickness="2" CornerRadius="10" Background="CadetBlue" Grid.Row="0" Padding="10" Margin="10">
+            <StackPanel Orientation="Vertical" Spacing="5">
+                <TextBlock Text="Add new user with work position" FontSize="16" FontWeight="Bold" Foreground="White" HorizontalAlignment="Center"/>
+                <TextBox Text="{Binding NewFirstName}" Watermark="First name"/>
+                <TextBox Text="{Binding NewLastName}" Watermark="Last name"/>
+                <TextBox Text="{Binding NewUsername}" Watermark="Username"/>
+                <TextBox Text="{Binding NewPassword}" Watermark="Password"/>
+                <TextBox Text="{Binding NewProductName}" Watermark="Product name"/>
+                <ComboBox ItemsSource="{Binding WorkPositions}" SelectedItem="{Binding NewUserWorkPosition}" DisplayMemberBinding="{Binding Name}" />
+                <ComboBox ItemsSource="{Binding Roles}" SelectedItem="{Binding NewRole}" DisplayMemberBinding="{Binding Name}" />
+                <Button Content="Add new user" Command="{Binding AddNewUserCommand}" Background="DarkGreen" Foreground="White"/>
+            </StackPanel>
+        </Border>
 
-    <StackPanel Grid.Row="0" Orientation="Vertical" Margin="10" Spacing="5">
-      <TextBlock Text="Add new user with work position" FontSize="16" FontWeight="Bold"/>
-      <TextBox Text="{Binding NewFirstName}" Watermark="First name"/>
-      <TextBox Text="{Binding NewLastName}" Watermark="Last name"/>
-      <TextBox Text="{Binding NewUsername}" Watermark="Username"/>
-      <TextBox Text="{Binding NewPassword}" Watermark="Password"/>
-      <TextBox Text="{Binding NewProductName}" Watermark="Product name"/>
-      <ComboBox ItemsSource="{Binding WorkPositions}"
-                SelectedItem="{Binding NewUserWorkPosition}"
-                DisplayMemberBinding="{Binding Name}" />
-      <ComboBox ItemsSource="{Binding Roles}"
-            SelectedItem="{Binding NewRole}"
-            DisplayMemberBinding="{Binding Name}" />
-      <Button Content="Add new user " Command="{Binding AddNewUserCommand}"/>
-    </StackPanel>
+      <Border BorderBrush="Black" BorderThickness="1" CornerRadius="6" Background="RosyBrown" Grid.Row="1" Padding="10" Margin="10">
+        <StackPanel Orientation="Vertical" Spacing="5">
+          <TextBlock Text="Delete user with work position" FontSize="16" FontWeight="Bold" Foreground="White" HorizontalAlignment="Center"/>
 
-  
-    <StackPanel Grid.Row="1" Orientation="Vertical" Margin="10" Spacing="5">
-      <TextBlock Text="Change work position" FontSize="16" FontWeight="Bold"/>
+          
+          <TextBlock Text="User Work Position ID:" FontWeight="Bold" Margin="5"/>
+          <ComboBox ItemsSource="{Binding UserWorkPositions}"
+                    SelectedItem="{Binding SelectedUserWorkPosition}"
+                    DisplayMemberBinding="{Binding Id}"
+                    Width="200"/>
 
-      
-      <ComboBox ItemsSource="{Binding UserWorkPositions}"
-                SelectedItem="{Binding SelectedUserWorkPosition}"
-                DisplayMemberBinding="{Binding Id}" />
+         
+          <TextBlock Text="User name:" FontWeight="Bold" Margin="5"/>
+          <TextBlock Text="{Binding SelectedUserWorkPosition.User.FirstName}" Foreground="White"/>
 
-      
-      <TextBlock Text="Current work position:" FontWeight="Bold"/>
-      <TextBlock Text="{Binding SelectedUserWorkPosition.WorkPosition.Name}" />
+          <TextBlock Text="User last Name:" FontWeight="Bold" Margin="5"/>
+          <TextBlock Text="{Binding SelectedUserWorkPosition.User.LastName}" Foreground="White"/>
 
-      
-      <ComboBox ItemsSource="{Binding WorkPositions}"
-                SelectedItem="{Binding SelectedWorkPosition}"
-                DisplayMemberBinding="{Binding Name}" />
+          <TextBlock Text="User work position:" FontWeight="Bold" Margin="5"/>
+          <TextBlock Text="{Binding SelectedUserWorkPosition.WorkPosition.Name}" Foreground="White"/>
 
-      
-      <TextBox Text="{Binding NewProductName}"
-               Watermark="Insert product name" />
+         
+          <Button Content="Delete User"
+                  Command="{Binding DeleteUserWorkPositionCommand}"
+                  HorizontalAlignment="Right"
+                  Background="DarkRed"
+                  Foreground="White"
+                  Padding="10,5"/>
+        </StackPanel>
+      </Border>
 
-      <Button Content="Update user work position" Command="{Binding ChangeUserRoleCommand}"/>
-    </StackPanel>
+      <Border BorderBrush="Black" BorderThickness="2" CornerRadius="10" Background="DarkBlue" Grid.Row="2" Padding="10" Margin="10">
+        <StackPanel Orientation="Vertical" Spacing="5">
+          <TextBlock Text="Add new work position" FontSize="16" FontWeight="Bold" Foreground="White" HorizontalAlignment="Center"/>
+          <TextBox Text="{Binding NewWorkPositionName}" Watermark="Name"/>
+          <TextBox Text="{Binding NewWorkPositionDescription}" Watermark="Description"/>
 
-  
-    <Grid Grid.Row="2">
-    
-      <Grid.RowDefinitions>
-        <RowDefinition Height="Auto"/>
-     
-        <RowDefinition Height="*"/>
-     
-      </Grid.RowDefinitions>
+          <Button Content="Add new user" Command="{Binding AddNewWorkPositionCommand}" Background="DarkGreen" Foreground="White"/>
+        </StackPanel>
+      </Border>
 
- 
-      <Grid Grid.Row="0" Margin="5">
-        <Grid.ColumnDefinitions>
-          <ColumnDefinition Width="50"/>
-          <ColumnDefinition Width="150"/>
-          <ColumnDefinition Width="150"/>
-          <ColumnDefinition Width="200"/>
-          <ColumnDefinition Width="150"/>
-          <ColumnDefinition Width="120"/>
-        </Grid.ColumnDefinitions>
 
-        <TextBlock Text="ID" FontWeight="Bold" Grid.Column="0" HorizontalAlignment="Center"/>
-        <TextBlock Text="First Name" FontWeight="Bold" Grid.Column="1" HorizontalAlignment="Center"/>
-        <TextBlock Text="Last Name" FontWeight="Bold" Grid.Column="2" HorizontalAlignment="Center"/>
-        <TextBlock Text="Work Position" FontWeight="Bold" Grid.Column="3" HorizontalAlignment="Center"/>
-        <TextBlock Text="Product Name" FontWeight="Bold" Grid.Column="4" HorizontalAlignment="Center"/>
-        <TextBlock Text="Assigned Date" FontWeight="Bold" Grid.Column="5" HorizontalAlignment="Center"/>
-      </Grid>
+      <Border BorderBrush="Black" BorderThickness="2" CornerRadius="10" Background="Olive" Grid.Row="3" Padding="10" Margin="10">
+            <StackPanel Orientation="Vertical" Spacing="5">
+                <TextBlock Text="Change  user work position" FontSize="16" FontWeight="Bold" Foreground="White" HorizontalAlignment="Center"/>
+                <TextBlock Text="User work postition ID:" FontWeight="Bold" Margin="5"/>
+                <ComboBox ItemsSource="{Binding UserWorkPositions}" SelectedItem="{Binding SelectedUserWorkPosition}" DisplayMemberBinding="{Binding Id}" />
+                <TextBlock Text="Current work position:" FontWeight="Bold" />
+                <TextBlock Text="{Binding SelectedUserWorkPosition.WorkPosition.Name}" Foreground="White"/>
+                <ComboBox ItemsSource="{Binding WorkPositions}" SelectedItem="{Binding SelectedWorkPosition}" DisplayMemberBinding="{Binding Name}" />
+                <TextBox Text="{Binding NewProductName}" Watermark="Insert product name"/>
+                <Button Content="Update user work position" Command="{Binding ChangeUserRoleCommand}" Background="DarkGreen" Foreground="White"/>
+            </StackPanel>
+        </Border>
 
-      
-      <ScrollViewer Grid.Row="1">
-        <ItemsControl ItemsSource="{Binding UserWorkPositions}">
-          <ItemsControl.ItemTemplate>
-            <DataTemplate>
-              <Grid Margin="5">
-                <Grid.ColumnDefinitions>
-                  <ColumnDefinition Width="50"/>
-                  <ColumnDefinition Width="150"/>
-                  <ColumnDefinition Width="150"/>
-                  <ColumnDefinition Width="200"/>
-                  <ColumnDefinition Width="150"/>
-                  <ColumnDefinition Width="120"/>
-                </Grid.ColumnDefinitions>
+       
+        <Grid Grid.Row="4">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
 
-                <TextBlock Text="{Binding Id}" Grid.Column="0" HorizontalAlignment="Center"/>
-                <TextBlock Text="{Binding User.FirstName}" Grid.Column="1" HorizontalAlignment="Center"/>
-                <TextBlock Text="{Binding User.LastName}" Grid.Column="2" HorizontalAlignment="Center"/>
-                <TextBlock Text="{Binding WorkPosition.Name}" Grid.Column="3" HorizontalAlignment="Center"/>
-                <TextBlock Text="{Binding ProductName}" Grid.Column="4" HorizontalAlignment="Center"/>
-                <TextBlock Text="{Binding Date}" Grid.Column="5" HorizontalAlignment="Center"/>
-              </Grid>
-            </DataTemplate>
-          </ItemsControl.ItemTemplate>
-        </ItemsControl>
-      </ScrollViewer>
+            <TextBlock Text="Users with work position" FontWeight="Bold" FontSize="17" HorizontalAlignment="Center" Grid.Row="0" Margin="0,0,0,10"/>
+
+            <Grid Grid.Row="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                
+                <Grid Grid.Row="0" Margin="5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="50" />
+                        <ColumnDefinition Width="150"/>
+                        <ColumnDefinition Width="150"/>
+                        <ColumnDefinition Width="150"/>
+                        <ColumnDefinition Width="200"/>
+                        <ColumnDefinition Width="150"/>
+                        <ColumnDefinition Width="120"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Text="ID" FontWeight="Bold" Grid.Column="0" HorizontalAlignment="Center"/>
+                    <TextBlock Text="First Name" FontWeight="Bold" Grid.Column="1" HorizontalAlignment="Center"/>
+                    <TextBlock Text="Last Name" FontWeight="Bold" Grid.Column="2" HorizontalAlignment="Center"/>
+                  <TextBlock Text="Username" FontWeight="Bold" Grid.Column="3" HorizontalAlignment="Center"/>
+                    <TextBlock Text="Work Position" FontWeight="Bold" Grid.Column="4" HorizontalAlignment="Center"/>
+                    <TextBlock Text="Product Name" FontWeight="Bold" Grid.Column="5" HorizontalAlignment="Center"/>
+                    <TextBlock Text="Assigned Date" FontWeight="Bold" Grid.Column="6" HorizontalAlignment="Center"/>
+                </Grid>
+
+                
+                <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+                    <ItemsControl ItemsSource="{Binding UserWorkPositions}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Border BorderBrush="White" BorderThickness="1" CornerRadius="5" Margin="5">
+                                    <Grid Margin="5">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="50"/>
+                                            <ColumnDefinition Width="150"/>
+                                            <ColumnDefinition Width="150"/>
+                                            <ColumnDefinition Width="150"/>
+                                            <ColumnDefinition Width="200"/>
+                                            <ColumnDefinition Width="150"/>
+                                            <ColumnDefinition Width="120"/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <TextBlock Text="{Binding Id}" Grid.Column="0" HorizontalAlignment="Center"/>
+                                        <TextBlock Text="{Binding User.FirstName}" Grid.Column="1" HorizontalAlignment="Center"/>
+                                        <TextBlock Text="{Binding User.LastName}" Grid.Column="2" HorizontalAlignment="Center"/>
+                                        <TextBlock Text="{Binding User.Username}" Grid.Column="3" HorizontalAlignment="Center"/>
+                                        <TextBlock Text="{Binding WorkPosition.Name}" Grid.Column="4" HorizontalAlignment="Center"/>
+                                        <TextBlock Text="{Binding ProductName}" Grid.Column="5" HorizontalAlignment="Center"/>
+                                        <TextBlock Text="{Binding Date}" Grid.Column="6" HorizontalAlignment="Center"/>
+                                    </Grid>
+                                </Border>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </ScrollViewer>
+            </Grid>
+        </Grid>
+
+        
+        <Button Grid.Row="5" Content="Logout" Command="{Binding LogoutCommand}" HorizontalAlignment="Right" Margin="10" Padding="10,5" Background="Red" Foreground="White"/>
     </Grid>
-
-
-    <Button Grid.Row="3" Content="Logout" Command="{Binding LogoutCommand}" HorizontalAlignment="Right" Margin="10"/>
-  </Grid>
-
+ </ScrollViewer>
 </UserControl>

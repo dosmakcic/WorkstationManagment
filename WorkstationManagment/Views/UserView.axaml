@@ -14,7 +14,7 @@
         <RowDefinition Height="Auto"/>
         <RowDefinition Height="Auto"/>
         <RowDefinition Height="Auto"/>
-      
+        <RowDefinition Height="Auto"/>
         <RowDefinition Height="*" />
        
         <RowDefinition Height="Auto"/>
@@ -40,11 +40,17 @@
       </StackPanel>
 
       <StackPanel Grid.Row="4" Spacing="10">
+        <TextBlock Text="Work Position description:" FontWeight="Bold"/>
+        <TextBlock Text="{Binding WorkPositionDescription}" FontSize="16"/>
+      </StackPanel>
+      
+
+      <StackPanel Grid.Row="5" Spacing="10">
         <TextBlock Text="Product Name:" FontWeight="Bold"/>
         <TextBlock Text="{Binding WorkPositionProductName}" FontSize="16"/>
       </StackPanel>
 
-      <StackPanel Grid.Row="5" Spacing="10">
+      <StackPanel Grid.Row="6" Spacing="10">
         <TextBlock Text="Assigned Date:" FontWeight="Bold"/>
         <TextBlock Text="{Binding AssignedDate}" FontSize="16"/>
       </StackPanel>
@@ -53,7 +59,7 @@
       <Button Content="Logout" Command="{Binding LogoutCommand}"
               Background="Red" Foreground="White"
               Padding="10" HorizontalAlignment="Right"
-              Grid.Row="6" Margin="20"/>
+              Grid.Row="7" Margin="20"/>
     </Grid>
   </Border>
 </UserControl>

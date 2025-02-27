@@ -5,23 +5,28 @@ using WorkstationManagment.Core.Services;
 
 namespace WorkstationManagment.UI.ViewModels
 {
-    public class MainWindowViewModel : ViewModelBase, IScreen
+    public class MainWindowViewModel : ViewModelBase
     {
-        public RoutingState Router { get; }
-        private readonly IServiceProvider _serviceProvider;
+        private ViewModelBase _currentViewModel;
 
-        public MainWindowViewModel(RoutingState router, IServiceProvider serviceProvider)
+        public ViewModelBase CurrentViewModel
         {
-            Router = router;
-            _serviceProvider = serviceProvider;
-           
+            get => _currentViewModel;
+            set => this.RaiseAndSetIfChanged(ref _currentViewModel, value);
         }
 
+        private readonly IServiceProvider _serviceProvider;
+        
+
+        public MainWindowViewModel(IServiceProvider serviceProvider)
+        {
+           
+            _serviceProvider = serviceProvider;
+        }
         public void NavigateToLogin()
         {
-            var loginViewModel = _serviceProvider.GetRequiredService<LoginViewModel>();
-
-            Router.Navigate.Execute(loginViewModel).Subscribe();
+            CurrentViewModel = _serviceProvider.GetRequiredService<LoginViewModel>();
         }
+
     }
 }
