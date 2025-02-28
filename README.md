@@ -24,7 +24,11 @@ Before running the project, ensure you have the following installed:
 ## 🛠️ Project architecture
 
 WorkstationManagment.Core     (Business logic,models,services and data) <br />
-WorkstationManagment.UI       ( UI (ViewModels and Views  )        <br />           
+WorkstationManagment.UI       ( UI (ViewModels and Views  )        <br />  
+
+## Cloning the repository
+`git clone https://github.com/dosmakcic/WorkstationManagment.git` 
+
 
 ## 🛠 Database Setup
 
@@ -64,13 +68,13 @@ Create a database manually
 Check the Connection String in App.axaml.cs
 
 
-string connectionString = "server=localhost;port=3306;database=workstation_db;user=root;password=my-secret-pw;";
+`string connectionString = "server=localhost;port=3306;database=workstation_db;user=root;password=my-secret-pw;";
 services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
+    options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString))); `
 
 4. Apply database migrations
   
-  dotnet ef database update
+   `dotnet ef database update --project WorkstationManagment.Core --startup-project WorkstationManagment.UI`
 
 If you use Package Manager Console , then use :
 
