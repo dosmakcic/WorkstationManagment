@@ -54,7 +54,6 @@ public partial class App : Application
         services.AddScoped<IUserWorkPositionService, UserWorkPositionService>();
         services.AddScoped<IWorkPositionService, WorkPositionService>();
         services.AddScoped<IRoleService, RoleService>();
-        services.AddSingleton<RoutingState>();
         services.AddSingleton<AdminViewModel>();
         services.AddSingleton<UserViewModel>();
         services.AddSingleton<LoginViewModel>();

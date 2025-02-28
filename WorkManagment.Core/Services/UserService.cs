@@ -60,8 +60,7 @@ namespace WorkstationManagment.Core.Services
                 existingUser.Username = user.Username;
                 existingUser.Password = user.Password;
                 existingUser.RoleId = user.RoleId;
-             //   existingUser.WorkPositionId = user.WorkPositionId;
-
+            
                 _context.Users.Update(existingUser);
                 await _context.SaveChangesAsync();
             }

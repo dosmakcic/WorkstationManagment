@@ -4,7 +4,7 @@
              x:Class="WorkstationManagment.UI.Views.LoginView"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              x:DataType="vm:LoginViewModel">
-  <!-- Border acts as a frame -->
+
   <Border BorderBrush="Gray" BorderThickness="2" Padding="40" CornerRadius="10">
     <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Spacing="10">
       <TextBox Watermark="Username" Text="{Binding Username}" />

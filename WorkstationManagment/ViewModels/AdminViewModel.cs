@@ -31,9 +31,6 @@ namespace WorkstationManagment.UI.ViewModels
         private string _newProductName = string.Empty;
         private WorkPosition? _newUserWorkPosition;
         private Role? _newRole;
-
-
-       
         private WorkPosition? _selectedWorkPosition;
 
 
@@ -69,9 +66,8 @@ namespace WorkstationManagment.UI.ViewModels
 
         public ObservableCollection<Role> Roles { get; }
 
-       
+   
         private UserWorkPosition? _selectedUserWorkPosition;
-
         public UserWorkPosition? SelectedUserWorkPosition
         {
             get => _selectedUserWorkPosition;
@@ -155,10 +151,8 @@ namespace WorkstationManagment.UI.ViewModels
             
             await _userWorkPositionService.RemoveWorkPositionAsync(SelectedUserWorkPosition.UserId, SelectedUserWorkPosition.WorkPositionId);
 
-            
             await _userWorkPositionService.AssignWorkPositionAsync(SelectedUserWorkPosition.UserId, SelectedWorkPosition.Id,NewProductName);
 
-           
             await LoadUserWorkPositionDataAsync();
         }
 
