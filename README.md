@@ -37,10 +37,11 @@ WorkstationManagment.UI       ( UI (ViewModels and Views  )        <br />
 If you prefer to use **Docker**, follow these steps to set up MySQL:  
 
 1. **Start a MySQL Container**  
-   Open a terminal and run the following command:  
+   Open a terminal and run the following command: 
 
    ```sh
    docker run --name workstation_db -e MYSQL_ROOT_PASSWORD=my-secret-pw -e MYSQL_DATABASE=workstation_db -p 3306:3306 -d mysql:latest
+If the user does not have the mysql:latest image downloaded, Docker will automatically download it on first startup.
 
 This command:
 
