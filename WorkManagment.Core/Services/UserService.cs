@@ -21,7 +21,6 @@ namespace WorkstationManagment.Core.Services
         }
 
 
-
         public async Task<User> GetUserByUsernameAsync(string username)
         {
             return await _context.Users.Include(u => u.Role)

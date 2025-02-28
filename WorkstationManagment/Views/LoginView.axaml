@@ -12,4 +12,5 @@
       <Button Content="Login" Command="{Binding LoginCommand}" />
     </StackPanel>
   </Border>
+  
 </UserControl>

@@ -9,7 +9,7 @@ using WorkstationManagment.UI.Views;
 using WorkstationManagment.Core.Data;
 using Microsoft.EntityFrameworkCore;
 using ReactiveUI;
-using WorkstationManagment.UI;
+
 
 namespace WorkstationManagment;
 
@@ -62,8 +62,7 @@ public partial class App : Application
         services.AddTransient<AdminView>();
         services.AddTransient<UserView>();
         services.AddTransient<LoginView>();
-        services.AddTransient<MainWindow>();
-          
+        services.AddTransient<MainWindow>();   
     }
 
 }

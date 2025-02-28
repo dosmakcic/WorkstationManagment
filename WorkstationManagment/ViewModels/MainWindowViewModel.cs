@@ -20,7 +20,6 @@ namespace WorkstationManagment.UI.ViewModels
 
         public MainWindowViewModel(IServiceProvider serviceProvider)
         {
-           
             _serviceProvider = serviceProvider;
         }
         public void NavigateToLogin()

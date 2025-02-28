@@ -9,7 +9,6 @@ namespace WorkstationManagment.Core.Services
 {
     public interface IUserService
     {
-        
         Task<User> GetUserByUsernameAsync(string username);
         Task<IEnumerable<User>> GetAllUsersAsync();
         Task AddUserAsync(User user);

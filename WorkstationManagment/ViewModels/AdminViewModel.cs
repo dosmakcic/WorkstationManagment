@@ -20,7 +20,6 @@ namespace WorkstationManagment.UI.ViewModels
         private readonly IRoleService _roleService;
         private readonly IWorkPositionService _workPositionService;
         private readonly MainWindowViewModel _mainWindowViewModel;
-
         private string _newFirstName = string.Empty;
         private string _newLastName = string.Empty;
         private string _newUsername = string.Empty;
@@ -86,7 +85,6 @@ namespace WorkstationManagment.UI.ViewModels
         public string NewLastName { get => _newLastName; set => this.RaiseAndSetIfChanged(ref _newLastName, value); }
         public string NewUsername { get => _newUsername; set => this.RaiseAndSetIfChanged(ref _newUsername, value); }
         public string NewPassword { get => _newPassword; set => this.RaiseAndSetIfChanged(ref _newPassword, value); }
-
         public string NewWorkPositionName { get => _newWorkPositionName; set => this.RaiseAndSetIfChanged(ref _newWorkPositionName, value); }
         public string NewWorkPositionDescription { get => _newWorkPositionDescription; set => this.RaiseAndSetIfChanged(ref _newWorkPositionDescription, value); }
         public int NewRoleId { get => _newRoleId; set => this.RaiseAndSetIfChanged(ref _newRoleId, value); }
